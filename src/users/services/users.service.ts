@@ -32,12 +32,7 @@ export class UsersService {
   }
 
   async findOne(username: string): Promise<User | undefined> {
-    return {
-      id: 1,
-      username: username,
-      email: 'test@test.com',
-      password: '12345678',
-    };
+    return this.userRepository.findOne({ where: { username: username } });
   }
 
   getUsers() {
