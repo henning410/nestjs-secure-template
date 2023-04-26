@@ -28,7 +28,7 @@ export class UsersController {
     return this.userService.findUsersById(id);
   }
 
-  @Post('create')
+  @Post('register')
   @UsePipes(ValidationPipe)
   createUsers(@Body() createUserDto: CreateUserDto) {
     return this.userService.createUser(createUserDto);
