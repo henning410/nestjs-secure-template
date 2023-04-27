@@ -27,15 +27,19 @@ export class UsersService {
     return newUser;
   }
 
-  findUsersById(id: number) {
-    //return this.userRepository.findOne(id);
+  async findOneByName(username: string): Promise<User | undefined> {
+    return this.userRepository.findOne({ where: { username: username } });
   }
 
-  async findOne(username: string): Promise<User | undefined> {
-    return this.userRepository.findOne({ where: { username: username } });
+  async findOneByMail(email: string): Promise<User | undefined> {
+    return this.userRepository.findOne({ where: { email: email } });
   }
 
   getUsers() {
     return this.userRepository.find();
+  }
+
+  findOneById(id: number) {
+    return this.userRepository.findOne({ where: { id: id } });
   }
 }
