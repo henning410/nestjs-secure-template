@@ -1,4 +1,5 @@
-import { IsEmail, IsLatitude, IsLongitude, IsNotEmpty } from 'class-validator';
+import { IsLatitude, IsLongitude, IsNotEmpty } from 'class-validator';
+import { User } from '../users/user.entity';
 
 export class CreateEvcsDto {
   @IsNotEmpty()
@@ -14,4 +15,6 @@ export class CreateEvcsDto {
 
   @IsNotEmpty()
   price: number;
+
+  user: User;
 }

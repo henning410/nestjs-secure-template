@@ -3,7 +3,7 @@ import {
   Controller,
   Get,
   Post,
-  Res,
+  Req,
   UseGuards,
   UsePipes,
   ValidationPipe,
@@ -11,22 +11,27 @@ import {
 import { AuthGuard } from '../../auth/auth.guard';
 import { EvcsService } from '../service/evcs.service';
 import { CreateEvcsDto } from '../evcs.dto';
+import { Request } from 'express';
 
 @Controller('evcs')
+@UseGuards(AuthGuard)
 export class EvcsController {
   constructor(private readonly evcsService: EvcsService) {}
 
-  @UseGuards(AuthGuard)
   @Get()
   getAll() {
     return this.evcsService.getAll();
   }
 
-  @UseGuards(AuthGuard)
   @Post()
   @UsePipes(ValidationPipe)
-  async createUsers(@Body() createEvcsDto: CreateEvcsDto) {
-    console.log('RECEOVED');
-    return this.evcsService.create(createEvcsDto);
+  async createEvcs(
+    @Body() createEvcsDto: CreateEvcsDto,
+    @Req() request: Request,
+  ) {
+    return this.evcsService.create(
+      createEvcsDto,
+      request.headers.authorization.split(' ')[1],
+    );
   }
 }
