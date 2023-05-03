@@ -25,7 +25,7 @@ export class EvcsController {
   @UseGuards(AuthGuard)
   @Post()
   @UsePipes(ValidationPipe)
-  async createUsers(@Res() res, @Body() createEvcsDto: CreateEvcsDto) {
+  async createUsers(@Body() createEvcsDto: CreateEvcsDto) {
     console.log('RECEOVED');
     return this.evcsService.create(createEvcsDto);
   }
